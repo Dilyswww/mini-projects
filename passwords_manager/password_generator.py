@@ -1,14 +1,14 @@
 import random
 import string
 
-def generate_psw(min_length, numbers = True, special_chars = True):
+def generate_psw(min_length, numbers = True, has_special = True):
     letters = string.ascii_letters
     digits = string.digits
     special = string.punctuation
     characters = letters
     if numbers:
         characters += digits
-    if special_chars:
+    if has_special:
         characters += special
         
     pwd = ""
@@ -19,8 +19,7 @@ def generate_psw(min_length, numbers = True, special_chars = True):
     while not meets_criteria or len(pwd) < min_length:
         new_char = random.choice(characters)
         pwd += new_char
-        # pwd = ''.join(random.choice(characters) for i in range(min_length))
-        # for char in pwd:
+
         if new_char in digits:
             has_number = True
         if new_char in special:
@@ -29,9 +28,16 @@ def generate_psw(min_length, numbers = True, special_chars = True):
         meets_criteria = True
         if numbers:
             meets_criteria = has_number
-        if special_chars:
+        if has_special:
             meets_criteria = meets_criteria and has_special
     return pwd
             
-pw = generate_psw(8, True, True)
-print(pw)
+'''
+if __name__ == "__main__":
+    min_length = int(input("Enter the minimum length of the password: "))            
+    has_number = input("Do you want numbers in the password? (y/n): ").lower() == "y"
+    has_special = input("Do you want special characters in the password? (y/n): ").lower() == "y"
+
+    pwd = generate_psw(min_length, has_number, has_special)
+    # print(pwd)
+'''

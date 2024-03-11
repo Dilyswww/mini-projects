@@ -1,4 +1,5 @@
 from cryptography.fernet import Fernet
+from password_generator import generate_psw
 
 """
 def write_key():
@@ -31,7 +32,12 @@ def view():
 def add():
     website = input("Website name: ")
     account = input("Account name: ")
-    password = input("Password: ")
+    
+    # Ask user for password length and preferences
+    min_length = int(input("Enter the minimum length of the password: "))
+    has_number = input("Do you want numbers in the password? (y/n): ").lower() == "y"
+    has_special = input("Do you want special characters in the password? (y/n): ").lower() == "y"
+    password = generate_psw(min_length, has_number, has_special)
     
     # open file in append mode
     with open("passwords.txt", "a") as f:
